@@ -6,16 +6,25 @@ class Request {
   final String psgsUrl = '/zcps_psgs';
   final String iotUrl = '/zcps_iot';
 
-  Future sendGet(url, params) async{
+  Future sendGet(url, [params]) async{
     Dio dio = new Global().dio;
-    Response response = await dio.get(url, queryParameters: params);
+    late Response response;
+    if(params != null) {
+      response = await dio.get(url, queryParameters: params);
+    } else {
+      response = await dio.get(url);
+    }
     return response;
   }
 
-  Future sendPost(url, params) async{
-    print('sendPost');
+  Future sendPost(url, [params]) async{
     Dio dio = new Global().dio;
-    Response response = await dio.post(url, data: params);
+    late Response response;
+    if(params != null) {
+      response = await dio.post(url, data: params);
+    } else {
+      response = await dio.post(url);
+    }
     return response;
   }
 }
