@@ -10,7 +10,7 @@ class LoginService {
       if(data['success'] == true) {
         return data['data'];
       } else {
-        throw data['data'];
+        throw data;
       }
     } catch (e) {
       throw e;
@@ -24,7 +24,7 @@ class LoginService {
       if(data['success'] == true) {
         return data['data'];
       } else {
-        throw data['data'];
+        throw data;
       }
     } catch (e) {
       throw e;

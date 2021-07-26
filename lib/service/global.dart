@@ -8,7 +8,7 @@ class Global {
   Global._internal() {
     dio = new Dio(BaseOptions(
       baseUrl: 'https://zhps.zc.gov.cn',
-      connectTimeout: 5000,
+      connectTimeout: 30000,
       receiveTimeout: 3000,
       contentType: Headers.jsonContentType,
       responseType: ResponseType.json,

@@ -21,7 +21,8 @@ class Request {
     Dio dio = new Global().dio;
     late Response response;
     if(params != null) {
-      response = await dio.post(url, data: params);
+      var formData = FormData.fromMap(params);
+      response = await dio.post(url, data: formData);
     } else {
       response = await dio.post(url);
     }
