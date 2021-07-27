@@ -30,4 +30,18 @@ class LoginService {
       throw e;
     }
   }
+  Future getUserInfo([params]) async{
+    String url = "${request.ewaterUrl}/sysUser/getUserInfo";
+    try {
+      var res = await request.sendGet(url, params);
+      Map<String, dynamic> data = res.data;
+      if(data['success'] == true) {
+        return data['data'];
+      } else {
+        throw data;
+      }
+    } catch (e) {
+      throw e;
+    }
+  }
 }

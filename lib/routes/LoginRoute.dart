@@ -3,8 +3,10 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../service/loginService.dart';
 import '../utils/AESUtil.dart';
+import '../models/user.dart';
 class LoginRoute extends StatefulWidget {
   @override
   _LoginRoute createState() => new _LoginRoute();
@@ -75,17 +77,26 @@ class _LoginRoute extends State<LoginRoute> {
         'clientIP': '',
         'clientOS': 'Android手机',
       };
-      print('param$param');
       new LoginService().login(param).then((res) {
-        _getUserInfo();
+        _getUserInfo(res);
       }).catchError((err) {
         print('loginErr:$err');
       });
     }
   }
 
-  _getUserInfo() {//获取用户信息
-
+  _getUserInfo(res) {//获取用户信息
+    print('_getUserInfo$res');
+    Map<String, String> param = {
+      'token': res['token']
+    };
+    new LoginService().getUserInfo(param).then((res) {
+      UserModel user = context.read<UserModel>();
+      user.userData = res;
+      print('user${Provider.of<UserModel>(context, listen: false).userData['loginName']}');
+    }).catchError((err) {
+      print('loginErr:$err');
+    });
   }
 
   _imgTap() {//图片点击事件
@@ -212,6 +223,7 @@ class _LoginRoute extends State<LoginRoute> {
                           enabledBorder: _getOutlineInputBorder(),
                           focusedBorder: _getOutlineInputBorder()
                         ),
+                        obscureText: true,
                         validator: (String? v) {
                           return v?.trim() != '' ? null : "密码不能为空";
                         }
@@ -275,6 +287,7 @@ class _LoginRoute extends State<LoginRoute> {
                             width: 90,
                             height: 40,
                             fit: BoxFit.contain,
+                            gaplessPlayback:true, //防止重绘
                           ),
                           onTap: _imgTap,
                         ) : Container(
