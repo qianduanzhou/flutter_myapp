@@ -78,6 +78,9 @@ class _LoginRoute extends State<LoginRoute> {
         'clientOS': 'Android手机',
       };
       new LoginService().login(param).then((res) {
+        UserModel user = context.read<UserModel>();
+        user.token = res['token'];
+        Navigator.pushNamed(context, '/menu');
         _getUserInfo(res);
       }).catchError((err) {
         print('loginErr:$err');
@@ -93,7 +96,6 @@ class _LoginRoute extends State<LoginRoute> {
     new LoginService().getUserInfo(param).then((res) {
       UserModel user = context.read<UserModel>();
       user.userData = res;
-      print('user${Provider.of<UserModel>(context, listen: false).userData['loginName']}');
     }).catchError((err) {
       print('loginErr:$err');
     });
