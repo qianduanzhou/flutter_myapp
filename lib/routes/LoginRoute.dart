@@ -26,7 +26,7 @@ class _LoginRoute extends State<LoginRoute> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _initImgCode();
+    // _initImgCode();
   }
   @override
   void dispose() {
@@ -84,6 +84,9 @@ class _LoginRoute extends State<LoginRoute> {
         _getUserInfo(res);
       }).catchError((err) {
         print('loginErr:$err');
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(err['msg']))
+        );
       });
     }
   }
