@@ -26,7 +26,7 @@ class _LoginRoute extends State<LoginRoute> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    // _initImgCode();
+    _initImgCode();
   }
   @override
   void dispose() {
@@ -37,7 +37,7 @@ class _LoginRoute extends State<LoginRoute> {
   }
 
   _initImgCode() {//加载验证码图片
-    new LoginService().getImage().then((res) {
+    new LoginService(context).getImage().then((res) {
       setState(() {
         _imgUrl = res['img'];
         _vcode = res['code'];
@@ -77,9 +77,11 @@ class _LoginRoute extends State<LoginRoute> {
         'clientIP': '',
         'clientOS': 'Android手机',
       };
-      new LoginService().login(param).then((res) {
+      new LoginService(context).login(param).then((res) {
+        _timer.cancel();
         UserModel user = context.read<UserModel>();
         user.token = res['token'];
+        print(user.token);
         Navigator.pushNamed(context, '/menu');
         _getUserInfo(res);
       }).catchError((err) {
@@ -96,7 +98,7 @@ class _LoginRoute extends State<LoginRoute> {
     Map<String, String> param = {
       'token': res['token']
     };
-    new LoginService().getUserInfo(param).then((res) {
+    new LoginService(context).getUserInfo(param).then((res) {
       UserModel user = context.read<UserModel>();
       user.userData = res;
     }).catchError((err) {

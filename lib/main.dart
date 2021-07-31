@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_myapp/routes/loginRoute.dart';
 import 'package:flutter_myapp/routes/MenuRoute.dart';
+import 'package:flutter_myapp/routes/listRoute.dart';
 import 'service/loginService.dart';
 import 'routes/loginRoute.dart';
 import './models/user.dart';
@@ -22,10 +23,11 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
-          initialRoute: '/menu',
+          initialRoute: '/',
           routes: {
             '/': (context) => LoginRoute(),
-            '/menu': (context) => MenuRoute()
+            '/menu': (context) => MenuRoute(),
+            '/list': (context) => ListRoute()
           }
       ),
     );

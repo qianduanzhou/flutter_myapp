@@ -1,6 +1,11 @@
+import 'package:flutter/cupertino.dart';
+
 import 'request.dart';
 //登录相关接口
 class LoginService {
+  final BuildContext context;
+  LoginService(this.context);
+
   Request request = new Request();
   Future login([params]) async{
     String url = "${request.psgsUrl}/login/loginValidNew2";

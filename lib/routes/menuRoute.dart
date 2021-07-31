@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/animation.dart';
-
 class AnimatedLogo extends AnimatedWidget {//动画方式2：AnimatedWidget方式渲染动画 可以不使用addListener()和setState() 来更新UI
   final String title;
   final IconData icon;
@@ -73,13 +72,13 @@ class MenuRoute extends StatefulWidget {
 
 class _MenuRoute extends State<MenuRoute> with SingleTickerProviderStateMixin {
   late Animation<double> animation0;
-
   late Animation<double> animation;
   late AnimationController controller;
 
   @override
   void initState() {
     super.initState();
+
     controller = AnimationController(vsync: this, duration: const Duration(seconds: 1));
 
     animation0 = Tween<double>(begin: 80, end: 90).animate(controller)
@@ -98,8 +97,7 @@ class _MenuRoute extends State<MenuRoute> with SingleTickerProviderStateMixin {
       }
     });
 
-
-    controller.forward();
+    controller.forward();//开始动画
   }
 
   @override
@@ -197,7 +195,11 @@ class _MenuRoute extends State<MenuRoute> with SingleTickerProviderStateMixin {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         AnimatedLogo(title: '管网实况图', icon: Icons.insights, bgColor: Color.fromRGBO(111, 201, 241, 1), animation: animation),
-                        Column(
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, '/list');
+                          },
+                          child: Column(
                             children: [
                               GrowTransition(
                                 animation: animation,
@@ -213,6 +215,7 @@ class _MenuRoute extends State<MenuRoute> with SingleTickerProviderStateMixin {
                               )
                             ],
                           ),
+                        ),
                         Column(
                           children: [
                             Container(
