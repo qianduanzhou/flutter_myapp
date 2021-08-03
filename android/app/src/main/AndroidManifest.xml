@@ -2,7 +2,7 @@
     package="com.example.flutter_myapp">
    <application
         android:label="flutter_myapp"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/app">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
@@ -38,4 +38,5 @@
             android:name="flutterEmbedding"
             android:value="2" />
     </application>
+    <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>
