@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:flutter_myapp/routes/loginRoute.dart';
 import 'package:flutter_myapp/routes/MenuRoute.dart';
 import 'package:flutter_myapp/routes/listRoute.dart';
-import 'service/loginService.dart';
 import 'routes/loginRoute.dart';
 import './models/user.dart';
 void main() {

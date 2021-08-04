@@ -7,6 +7,8 @@ import 'package:provider/provider.dart';
 import '../service/loginService.dart';
 import '../utils/AESUtil.dart';
 import '../models/user.dart';
+import '../utils/scale.dart';
+
 class LoginRoute extends StatefulWidget {
   @override
   _LoginRoute createState() => new _LoginRoute();
@@ -113,13 +115,14 @@ class _LoginRoute extends State<LoginRoute> {
 
   OutlineInputBorder _getOutlineInputBorder() {//获取输入框边框样式
     return OutlineInputBorder(
-      borderRadius: BorderRadius.circular(50),
+      borderRadius: BorderRadius.circular(Scale.setPx(50)),
       borderSide: BorderSide.none
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    Scale.initialize(context);
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -134,14 +137,14 @@ class _LoginRoute extends State<LoginRoute> {
           children: [
             Image.asset(
               "assets/img/login/top.png",
-              width: 120
+              width: Scale.setPx(100)
             ),
             Text(
               '增排通',
               style: TextStyle(
                 color: Color(0xFFFFFFFF),
                 decoration: TextDecoration.none,
-                fontSize: 40
+                fontSize: Scale.setPx(30)
               ),
             ),
             Text(
@@ -149,7 +152,7 @@ class _LoginRoute extends State<LoginRoute> {
               style: TextStyle(
                 color: Color(0xFFf2a001),
                 decoration: TextDecoration.none,
-                fontSize: 30
+                fontSize: Scale.setPx(25)
               ),
             ),
             Form(
@@ -158,20 +161,20 @@ class _LoginRoute extends State<LoginRoute> {
               child: Column(
                 children: [
                   Container(
-                    width: 400,
-                    height: 90,
-                    margin: EdgeInsets.only(top: 50),
+                    width: Scale.setPx(340),
+                    height: Scale.setPx(90),
+                    margin: EdgeInsets.only(top: Scale.setPx(50)),
                     alignment: Alignment.center,
                     child: ConstrainedBox(
                       constraints: BoxConstraints(
-                        minHeight: 90,
+                        minHeight: Scale.setPx(90),
                       ),
                       child: TextFormField(
                         controller: _unameController,
                         autofocus: true,
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 18
+                          fontSize: Scale.setPx(18)
                         ),
                         textAlign: TextAlign.center,
                         decoration: InputDecoration(
@@ -182,11 +185,11 @@ class _LoginRoute extends State<LoginRoute> {
                           prefixIcon: Icon(
                             Icons.perm_identity,
                             color: Color(0xFFffffff),
-                            size: 30,
+                            size: Scale.setPx(30),
                           ),
                           fillColor: Color.fromARGB(56, 255, 255, 255),//背景颜色，必须结合filled: true,才有效
 		                      filled: true,//重点，必须设置为true，fillColor才有效
-                          contentPadding: EdgeInsets.all(16),
+                          contentPadding: EdgeInsets.all(Scale.setPx(12)),
                           border: _getOutlineInputBorder(),
                           enabledBorder: _getOutlineInputBorder(),
                           focusedBorder: _getOutlineInputBorder()
@@ -198,19 +201,19 @@ class _LoginRoute extends State<LoginRoute> {
                     )
                   ),
                   Container(
-                    width: 400,
-                    height: 90,
+                    width: Scale.setPx(340),
+                    height: Scale.setPx(90),
                     alignment: Alignment.center,
                     child: ConstrainedBox(
                       constraints: BoxConstraints(
-                        minHeight: 90,
+                        minHeight: Scale.setPx(90),
                       ),
                       child: TextFormField(
                         controller: _passwordController,
                         autofocus: true,
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 18
+                          fontSize: Scale.setPx(18)
                         ),
                         textAlign: TextAlign.center,
                         decoration: InputDecoration(
@@ -219,13 +222,13 @@ class _LoginRoute extends State<LoginRoute> {
                             color: Color(0xFFffffff),
                           ),
                           prefixIcon: Icon(
-                            Icons.perm_identity,
+                            Icons.lock,
                             color: Color(0xFFffffff),
-                            size: 30,
+                            size: Scale.setPx(30),
                           ),
                           fillColor: Color.fromARGB(56, 255, 255, 255),//背景颜色，必须结合filled: true,才有效
 		                      filled: true,//重点，必须设置为true，fillColor才有效
-                          contentPadding: EdgeInsets.all(16),
+                          contentPadding: EdgeInsets.all(Scale.setPx(12)),
                           border: _getOutlineInputBorder(),
                           enabledBorder: _getOutlineInputBorder(),
                           focusedBorder: _getOutlineInputBorder()
@@ -242,24 +245,24 @@ class _LoginRoute extends State<LoginRoute> {
                       color: Color.fromARGB(56, 255, 255, 255),
                       borderRadius: BorderRadius.all(Radius.circular(50)),
                     ),
-                    width: 400,
-                    height: 60,
+                    width: Scale.setPx(340),
+                    height: Scale.setPx(50),
                     alignment: Alignment.center,
-                    padding: EdgeInsets.only(left: 20, right: 10),
+                    padding: EdgeInsets.only(left: Scale.setPx(20), right: Scale.setPx(10)),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
                           '验证码',
                           style: TextStyle(
-                            color: Color(0xff606266),
+                            color: Color(0xff506266),
                             fontWeight: FontWeight.bold
                           ),
                         ),
                         Container(
                           width: 90,
                           height: 35,
-                          margin: EdgeInsets.only(left: 10,right: 30),
+                          margin: EdgeInsets.only(left: Scale.setPx(10),right: Scale.setPx(30)),
                           child: TextFormField(
                             controller: _checkCodeController,
                             style: TextStyle(
@@ -291,48 +294,48 @@ class _LoginRoute extends State<LoginRoute> {
                             base64.decode(
                               _imgUrl,
                             ),
-                            width: 90,
-                            height: 40,
+                            width: Scale.setPx(90),
+                            height: Scale.setPx(40),
                             fit: BoxFit.contain,
                             gaplessPlayback:true, //防止重绘
                           ),
                           onTap: _imgTap,
                         ) : Container(
-                          width: 90,
-                          height: 40,
+                          width: Scale.setPx(90),
+                          height: Scale.setPx(40),
                           decoration: BoxDecoration(
                             color: Colors.white
                           ),
                         ),
                         Container(
-                          margin: EdgeInsets.only(left: 50),
+                          margin: EdgeInsets.only(left: Scale.setPx(20)),
                           child: Text(
                             _countdown.toString(),
                             style: TextStyle(
                               color: Colors.red,
-                              fontSize: 18,
+                              fontSize: Scale.setPx(18),
                             ),
                           ),
                         ),
                     ])
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 50),
-                    width: 400,
-                    height: 60,
+                    margin: EdgeInsets.only(top: Scale.setPx(50)),
+                    width: Scale.setPx(340),
+                    height: Scale.setPx(50),
                     alignment: Alignment.center,
                     child: CupertinoButton(
                       color: Color(0xfff2a001),
-                      borderRadius: BorderRadius.circular(50),
+                      borderRadius: BorderRadius.circular(Scale.setPx(50)),
                       disabledColor: Colors.grey,
                       child: Container(
-                        width: 400,
-                        height: 60,
+                        width: Scale.setPx(340),
+                        height: Scale.setPx(50),
                         alignment: Alignment.center,
                         child: Text(
                           '登录',
                           style: TextStyle(
-                            fontSize: 20,
+                            fontSize: Scale.setPx(20),
                             fontWeight: FontWeight.bold
                           ),
                         ),

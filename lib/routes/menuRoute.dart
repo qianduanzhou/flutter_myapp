@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/animation.dart';
+import '../utils/scale.dart';
 class AnimatedLogo extends AnimatedWidget {//动画方式2：AnimatedWidget方式渲染动画 可以不使用addListener()和setState() 来更新UI
   final String title;
   final IconData icon;
@@ -17,20 +18,20 @@ class AnimatedLogo extends AnimatedWidget {//动画方式2：AnimatedWidget方�
         Container(
           width: animation.value,
           height: animation.value,
-          margin: EdgeInsets.only(bottom: 5),
+          margin: EdgeInsets.only(bottom: Scale.setPx(5)),
           decoration: BoxDecoration(
             color: bgColor,
-            borderRadius: BorderRadius.all(Radius.circular(30))
+            borderRadius: BorderRadius.all(Radius.circular(Scale.setPx(30)))
           ),
           child: Icon(
             icon,
             color: Colors.white,
-            size: 40,
+            size: Scale.setPx(40),
           ),
         ),
         Text(
           title,
-          style: TextStyle(color: Color(0xff666666), fontSize: 16),
+          style: TextStyle(color: Color(0xff666666), fontSize: Scale.setPx(16)),
         )
       ],
     );
@@ -52,10 +53,10 @@ class GrowTransition extends StatelessWidget {//动画方式3： 把渲染过程
         return Container(
           width: animation.value,
           height: animation.value,
-          margin: EdgeInsets.only(bottom: 5),
+          margin: EdgeInsets.only(bottom: Scale.setPx(5)),
           decoration: BoxDecoration(
             color: Color.fromRGBO(255, 185, 101, 1),
-            borderRadius: BorderRadius.all(Radius.circular(30))
+            borderRadius: BorderRadius.all(Radius.circular(Scale.setPx(30)))
           ),
           child: child
         );
@@ -108,6 +109,7 @@ class _MenuRoute extends State<MenuRoute> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    Scale.initialize(context);
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -120,7 +122,7 @@ class _MenuRoute extends State<MenuRoute> with SingleTickerProviderStateMixin {
               color: Color(0xfff1f2f3),
               child: Container(
                 width: double.infinity,
-                height: 300,
+                height: Scale.setPx(300),
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage("assets/img/menu/bg.png"),
@@ -131,36 +133,41 @@ class _MenuRoute extends State<MenuRoute> with SingleTickerProviderStateMixin {
                   alignment: Alignment.center,
                   children: [
                     Positioned(
-                      left: 20,
-                      top: 30,
+                      left: Scale.setPx(20),
+                      top: Scale.setPx(50),
                       child: Container(
-                        width: 100,
-                        height: 30,
+                        width: Scale.setPx(100),
+                        height: Scale.setPx(30),
                         decoration: BoxDecoration(
                           color: Color(0xffecf5ff),
                           borderRadius: BorderRadius.all(Radius.circular(3))
                         ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Icon(
-                              Icons.west,
-                              size: 20,
-                            ),
-                            Text(
-                              '退出登录'
-                            )
-                          ],
-                        ),
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Icon(
+                                Icons.west,
+                                size: Scale.setPx(20),
+                              ),
+                              Text(
+                                '退出登录'
+                              )
+                            ],
+                          ),
+                        )
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.only(top: 50),
+                      margin: EdgeInsets.only(top: Scale.setPx(50)),
                       child: Column(
                         children: [
                           Image.asset(
                             "assets/img/login/top.png",
-                            width: 120
+                            width: Scale.setPx(120)
                           ),
                           Text(
                             '增排通',
@@ -168,7 +175,7 @@ class _MenuRoute extends State<MenuRoute> with SingleTickerProviderStateMixin {
                               color: Color(0xFFFFFFFF),
                               decoration: TextDecoration.none,
                               fontWeight: FontWeight.bold,
-                              fontSize: 30
+                              fontSize: Scale.setPx(30)
                             ),
                           ),
                         ]
@@ -179,14 +186,14 @@ class _MenuRoute extends State<MenuRoute> with SingleTickerProviderStateMixin {
               ),
             ),
             Positioned(
-              bottom: 20,
+              bottom: 0,
               child: Container(
-                width: 500,
-                height: 730,
-                padding: EdgeInsets.symmetric(vertical: 30),
+                width: Scale.setPx(375),
+                height: Scale.screenHeight * 0.7,
+                padding: EdgeInsets.symmetric(vertical: Scale.setPx(30)),
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(20))
+                  borderRadius: BorderRadius.only(topLeft: Radius.circular(Scale.setPx(20)), topRight: Radius.circular(Scale.setPx(20)))
                 ),
                 child: Column(
                   children: [
@@ -206,12 +213,12 @@ class _MenuRoute extends State<MenuRoute> with SingleTickerProviderStateMixin {
                                 child: Icon(
                                   Icons.visibility,
                                   color: Colors.white,
-                                  size: 40,
+                                  size: Scale.setPx(40),
                                 )
                               ),
                               Text(
                                 '监测检测',
-                                style: TextStyle(color: Color(0xff666666), fontSize: 16),
+                                style: TextStyle(color: Color(0xff666666), fontSize: Scale.setPx(16)),
                               )
                             ],
                           ),
@@ -221,20 +228,20 @@ class _MenuRoute extends State<MenuRoute> with SingleTickerProviderStateMixin {
                             Container(
                               width: animation.value,
                               height: animation.value,
-                              margin: EdgeInsets.only(bottom: 5),
+                              margin: EdgeInsets.only(bottom: Scale.setPx(5)),
                               decoration: BoxDecoration(
                                 color: Color.fromRGBO(90, 216, 152, 1),
-                                borderRadius: BorderRadius.all(Radius.circular(30))
+                                borderRadius: BorderRadius.all(Radius.circular(Scale.setPx(30)))
                               ),
                               child: Icon(
                                 Icons.search,
                                 color: Colors.white,
-                                size: 40,
+                                size: Scale.setPx(40),
                               ),
                             ),
                             Text(
                               '工单巡检',
-                              style: TextStyle(color: Color(0xff666666), fontSize: 16),
+                              style: TextStyle(color: Color(0xff666666), fontSize: Scale.setPx(16)),
                             )
                           ],
                         ),
